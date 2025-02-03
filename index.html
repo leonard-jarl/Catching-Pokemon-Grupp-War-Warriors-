@@ -6,38 +6,54 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <script src="./scripts/oGameData.js"></script>
     <script type="module" src="./scripts/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Gotta catch 'em all</title>
   </head>
   <body>
     <!-- Detta är koden från mitt exempel, skriv gärna egen HTML om så önskas -->
-    <section class="form-wrapper" id="formWrapper">
-      <form class="form" id="form">
-        <h1>Welcome young pokemon trainer</h1>
-        <h3>Please enter your name</h2>
-        <input id="nick" type="text" placeholder="Trainer nickname" />
-        <input id="age" type="text" placeholder="Trainer age">
-        <p>Are you a boy? Or are you a girl?</p>
-        <label>
-          <input type="radio" name="gender" id="boy">
-          Boy
-        </label>
-        <label>
-          <input type="radio" name="gender" id="girl">
-          Girl
-        </label>
-        <button id="submitBtn">Let's catch some pokemons!</button>
-      </form>
-    </section>
-    <section id="gameField" class="game-field d-none">
-        <section class="high-score d-none" id="highScore">
-            <h1>Congratulations!</h1>
-            <h3 id="winMsg"></h3>
-            <ol class="highscore-list" id="highscoreList">
+    <main>
+      <section class="wrapper game-start" id="gameStartSection">
+          <form class="game-start__form" id="StartForm">
 
-            </ol>
-            <button id="playAgainBtn">Play again?</button>
-        </section>
-    </section>
+              <h1 class="game-start__heading">Welcome young pokemon trainer</h1>
+
+              <p class="game-start__error-msg" id="errorMsg"> </p>
+              
+              <label class="game-start__label" for="name"> What's your name? </label>
+              <input  class="game-start__input" type="text" name="name" placeholder="Name" id="nameInput">
+
+              <label class="game-start__label" for="age"> How old are you? </label>
+              <input class="game-start__input" type="number" name="age" placeholder="age" id="ageInput">
+              
+              <label class="game-start__label" for="gender"> Are you a boy or a girl? </label>
+              <select class="game-start__selector" name="gender" id="genderInput">
+                  <option value=""> </option>
+                  <option value="1">Boy</option>
+                  <option value="2">Girl</option>
+              </select>
+              <button class="button button__start" id="startButton"> Start </button>
+          </form>
+      </section> 
+      
+      <section class="wrapper high-score d-none" id="highScore">
+          <h1 class="high-score__heading"> Congratulations </h1>
+          
+          <h2 class="high-score__win-msg" id="winMsg"> </h2>
+
+          <ol class="high-score__list" id="highscoreList">
+              <li class="high-score__list-item" id="listItem"> player: xx time:xx </li>
+              <li class="high-score__list-item" id="listItem"> player: xx time:xx </li>
+              <li class="high-score__list-item" id="listItem"> player: xx time:xx </li>
+              <li class="high-score__list-item" id="listItem"> player: xx time:xx </li>
+          </ol>
+
+          <button class="button button__restart" id="restartButton"> Restart </button>
+      </section>
+          
+          <section class="game-field" id="gameField"> </section>
+      </main>
     
     <!-- Läs in audioelementet från DOMen. För att spela .play(), för att pausa .pause(), för att starta om .load()  -->
     <audio src="./assets/pokemon_vs_trainer.mp3"></audio>
