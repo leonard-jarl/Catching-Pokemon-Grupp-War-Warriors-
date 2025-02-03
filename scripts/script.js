@@ -21,7 +21,7 @@ function init() {
 
 function prepGame() {
     let startButton = document.getElementById('startButton');
-    randomPokemon();
+    randomPokemons();
     startButton.addEventListener('click', validateForm);
 }
 
