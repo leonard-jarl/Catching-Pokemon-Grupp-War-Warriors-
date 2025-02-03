@@ -31,7 +31,7 @@ function validateForm() {
   const gender = document.querySelector("#genderInput").value;
 
   try {
-    if (name.length >= 5 && name.length >= 10) {
+    if (name.length < 5 || name.length >= 10) {
       throw new Error("namn måste vara mellan 5 och 10 tecken långt");
     }
     if (age < 9 || age > 15) {
@@ -76,15 +76,15 @@ function startTimer() {
 }
 
 function gameStart() {
-    let form = document.getElementById('gameStartSection');
-    form.classList.add('d-none');
-    let backgroundImage = document.querySelector('body');
-    backgroundImage.style.backgroundImage = "url('/assets/arena-background.png')";
-    let audio = document.querySelector('audio');
-    audio.play();
-    startTimer();
-    movePokemon();
-    catchPokemon();
+  let form = document.getElementById("gameStartSection");
+  form.classList.add("d-none");
+  let backgroundImage = document.querySelector("body");
+  backgroundImage.style.backgroundImage = "url('/assets/arena-background.png')";
+  let audio = document.querySelector("audio");
+  audio.play();
+  startTimer();
+  movePokemon();
+  catchPokemon();
 }
 
 function stopTimer() {
