@@ -14,14 +14,21 @@ function formValidation() {
     if (age <= 10 || age > 15) {
       throw new Error("Ålder måste vara mellan 10 och 15 år gammal");
     }
-    if (gender !== "pojke" || gender !== "flicka") {
+    if (gender !== "Boy" || gender !== "Girl") {
       throw new Error("Kön måste vara pojke eller flicka");
     }
 
-    gameStart();
+    // gameStart();
     return true;
   } catch (error) {
     document.querySelector("#errorMsg").textContent = "Error: " + error.message;
   }
   return false;
 }
+
+document.querySelector("#startButton").addEventListener("click", function (e) {
+  e.preventDefault();
+  if (formValidation()) {
+    alert("The game has Bagan!");
+  }
+});
