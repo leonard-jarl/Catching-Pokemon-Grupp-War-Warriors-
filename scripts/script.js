@@ -2,27 +2,27 @@
 
 let oGameData = {};
 
-window.addEventListener('load', () => {
-    init();
-    prepGame();
+window.addEventListener("load", () => {
+  init();
+  prepGame();
 });
 
 function init() {
-    oGameData.pokemonNumbers = [];
-    oGameData.nmbrOfCaughtPokemons = 0;
-    oGameData.startTime = 0;
-    oGameData.endTime = 0;
-    oGameData.timerId = null;
-    oGameData.nmbrOfSeconds = 0;
-    oGameData.trainerName = '';
-    oGameData.trainerAge = 0;
-    oGameData.trainerGender = '';
+  oGameData.pokemonNumbers = [];
+  oGameData.nmbrOfCaughtPokemons = 0;
+  oGameData.startTime = 0;
+  oGameData.endTime = 0;
+  oGameData.timerId = null;
+  oGameData.nmbrOfSeconds = 0;
+  oGameData.trainerName = "";
+  oGameData.trainerAge = 0;
+  oGameData.trainerGender = "";
 }
 
 function prepGame() {
-    let startButton = document.getElementById('startButton');
-    randomPokemons();
-    startButton.addEventListener('click', validateForm);
+  let startButton = document.getElementById("startButton");
+  randomPokemons();
+  startButton.addEventListener("click", validateForm);
 }
 
 function validateForm() {
@@ -31,13 +31,13 @@ function validateForm() {
   const gender = document.querySelector("#genderInput").value;
 
   try {
-    if (name.length <= 5 || name.length >= 10) {
+    if (name.length >= 5 && name.length >= 10) {
       throw new Error("namn måste vara mellan 5 och 10 tecken långt");
     }
-    if (age <= 10 || age > 15) {
+    if (age < 9 || age > 15) {
       throw new Error("Ålder måste vara mellan 10 och 15 år gammal");
     }
-    if (gender !== "Boy" || gender !== "Girl") {
+    if (gender !== "Boy" && gender !== "Girl") {
       throw new Error("Kön måste vara pojke eller flicka");
     }
 
@@ -53,20 +53,20 @@ document.querySelector("#startButton").addEventListener("click", function (e) {
   e.preventDefault();
 });
 
-function randomPokemons () {
-    const allPokemons = [];    
+function randomPokemons() {
+  const allPokemons = [];
 
-    for (let i = 1; i < 152; i++){
-        let pokemon = i  
-        allPokemons.push(pokemon);
-    }
+  for (let i = 1; i < 152; i++) {
+    let pokemon = i;
+    allPokemons.push(pokemon);
+  }
 
-    for (let i = 1; i < 10 + 1; i++) {
-        let random = i;
-        random = Math.floor(Math.random() * allPokemons.length + 1);
-        let pokemon = random.toString().padStart(3,"0");
-        oGameData.pokemonNumbers.push(`assets/pokemons/${pokemon}.png`);
-    }
+  for (let i = 1; i < 10 + 1; i++) {
+    let random = i;
+    random = Math.floor(Math.random() * allPokemons.length + 1);
+    let pokemon = random.toString().padStart(3, "0");
+    oGameData.pokemonNumbers.push(`assets/pokemons/${pokemon}.png`);
+  }
 }
 
 function startTimer() {
