@@ -70,9 +70,31 @@ function randomPokemons() {
 }
 
 function startTimer() {
+  
     oGameData.startTimeInMilliseconds();
     console.log("Game timer has started.");
     console.log("Start time (ms):", oGameData.startTime);
+
+  let gameStartTime = Date.now();
+  console.log("Game timer has started.");
+  console.log("Start time (ms):", gameStartTime);
+}
+
+function gameStart() {
+  let audio = document.querySelector("audio");
+  audio.play();
+  startTimer();
+  movePokemon();
+  catchPokemon();
+  if (oGameData.nmbrOfCaughtPokemons === 10) {
+    gameOver();
+  }
+}
+
+function stopTimer() {
+  let gameStopTime = Date.now();
+  console.log("Game timer has started.");
+  console.log("Start time (ms):", gameStopTime);
 }
 
 function gameStart() {
