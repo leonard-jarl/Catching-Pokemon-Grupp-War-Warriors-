@@ -28,7 +28,4 @@ function formValidation() {
 
 document.querySelector("#startButton").addEventListener("click", function (e) {
   e.preventDefault();
-  if (formValidation()) {
-    alert("The game has Bagan!");
-  }
 });
