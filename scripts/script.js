@@ -70,7 +70,19 @@ function randomPokemons() {
 }
 
 function startTimer() {
-  oGameData.startTimeInMilliseconds();
-  console.log("Game timer has started.");
-  console.log("Start time (ms):", oGameData.startTime);
+    oGameData.startTimeInMilliseconds();
+    console.log("Game timer has started.");
+    console.log("Start time (ms):", oGameData.startTime);
+}
+
+function gameStart() {
+    let form = document.getElementById('gameStartSection');
+    form.classList.add('d-none');
+    let backgroundImage = document.querySelector('body');
+    backgroundImage.style.backgroundImage = "url('/assets/arena-background.png')";
+    let audio = document.querySelector('audio');
+    audio.play();
+    startTimer();
+    movePokemon();
+    catchPokemon();
 }
