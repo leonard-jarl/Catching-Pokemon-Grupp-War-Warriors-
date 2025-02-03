@@ -68,3 +68,9 @@ function randomPokemons () {
         oGameData.pokemonNumbers.push(`assets/pokemons/${pokemon}.png`);
     }
 }
+
+function startTimer() {
+  oGameData.startTimeInMilliseconds();
+  console.log("Game timer has started.");
+  console.log("Start time (ms):", oGameData.startTime);
+}
