@@ -52,3 +52,19 @@ function validateForm() {
 document.querySelector("#startButton").addEventListener("click", function (e) {
   e.preventDefault();
 });
+
+function randomPokemons () {
+    const allPokemons = [];    
+
+    for (let i = 1; i < 152; i++){
+        let pokemon = i  
+        allPokemons.push(pokemon);
+    }
+
+    for (let i = 1; i < 10 + 1; i++) {
+        let random = i;
+        random = Math.floor(Math.random() * allPokemons.length + 1);
+        let pokemon = random.toString().padStart(3,"0");
+        oGameData.pokemonNumbers.push(`assets/pokemons/${pokemon}.png`);
+    }
+}
