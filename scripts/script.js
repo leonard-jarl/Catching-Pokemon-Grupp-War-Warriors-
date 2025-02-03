@@ -95,6 +95,8 @@ function stopTimer() {
 
 function gameOver() {
   stopTimer();
+  let scoreboard = document.getElementById('highScore')
+  scoreboard.classList.remove('d-none')
   getScoreboard();
   let restartButton = document.getElementById('restartButton')
   restartButton.addEventListener("click", restartGame);
