@@ -5,6 +5,11 @@
     font-family: "Press Start 2P", serif;
     text-transform: uppercase;
 }
+
+a, button, select {
+    cursor: url(/assets/cursor.cur), auto;
+  }
+  
 img {
     width: 300px;
     transition: all 3s linear;
@@ -16,9 +21,11 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     height: 100vh;
-    width: 100%; 
+    width: 100%;
+    cursor: url(/assets/cursor.cur), auto;
 }
-main{
+
+main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,11 +41,13 @@ main{
     background-color: rgb(255, 255, 255);
     box-shadow: 8px 8px 1px 0 rgb(37, 37, 37);
 }
+
 .game-start__form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .game-start__input,
 .game-start__selector {
     width: 50%;
@@ -48,10 +57,12 @@ main{
     margin-bottom: 3%;
     font-size: 0.8rem;
 }
+
 .game-start__error-msg {
     color: red;
     margin: 2%;
 }
+
 .error-focus {
     outline: none;
     border: 3pc solid red;
@@ -63,24 +74,23 @@ main{
     justify-content: center;
     align-items: center;
 }
+
 .high-score__list {
     width: 75%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .high-score__list-item {
     margin: 2%;
 }
  
-
-
 .button {
     padding: 13px 25px;
     font-size: 1.2rem;
     font-weight: 600;
     border: 4px solid #000;
-    cursor: pointer;
     position: relative;
     margin: 2%;
     background-color: #9ae75f;
@@ -90,12 +100,11 @@ main{
     inset 0 0 0 5px #c1f0a0;
     text-shadow: 3px 3px #84cb4e;
 }
+
 .button:active {
     box-shadow: none;
     transform: translate(4px, 4px);
 }
-
-
 
 .d-none {
     display: none;
