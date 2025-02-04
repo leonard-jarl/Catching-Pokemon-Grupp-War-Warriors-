@@ -11,6 +11,7 @@ a, button, select {
   }
   
 img {
+    position: absolute;
     width: 300px;
     transition: all 3s linear;
 }

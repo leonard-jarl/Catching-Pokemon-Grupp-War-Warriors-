@@ -37,6 +37,7 @@ document.querySelector("#startButton").addEventListener("click", function (e) {
   e.preventDefault();
 });
 
+
 function startTimer() {
   oGameData.startTime = Date.now();
   console.log("Game timer has started.");
@@ -91,26 +92,30 @@ function resetGame() {
   prepGame();
 }
 function spawnPokemon() {
-  const gameField = document.getElementById("gameField");
+  const gameField = document.querySelector("#gameField");
   if (!gameField) return;
 
-  for (let i = 0; i < 10; i++) {
-    let pokemonId = String(Math.floor(Math.random() * 151) + 1).padStart(3, "0");
-    let pokemonSrc = `assets/pokemons/${pokemonId}.png`;
+  const pokemonElements = [];
 
-    const pokemon = document.createElement("img");
-    pokemon.src = pokemonSrc;
-    pokemon.classList.add("pokemon");
-
-    pokemon.style.position = "absolute";
-    pokemon.style.width = "300px";
-    pokemon.style.height = "300px";
-    pokemon.style.left = `${Math.random() * (window.innerWidth - 300)}px`;
-    pokemon.style.top = `${Math.random() * (window.innerHeight - 300)}px`;
-
-    gameField.appendChild(pokemon);
-
-    setInterval(() => movePokemon(pokemon), 3000);
+  const allPokemons = [];
+  for (let i = 1; i < 152; i++) {
+    allPokemons.push(i);
   }
+
+  for (let i = 0; i < 10; i++) {
+    let random = Math.floor(Math.random() * allPokemons.length) + 1;
+    let pokemon = random.toString().padStart(3, "0");
+    const src = `assets/pokemons/${pokemon}.png`;
+
+    oGameData.pokemonNumbers.push(src);
+
+    const img = document.createElement('img');
+    img.src = src;
+    gameField.appendChild(img);
+
+    pokemonElements.push(img);
+  }
+
+  setInterval(() => movePokemon(pokemonElements), 3000);
 }
 
