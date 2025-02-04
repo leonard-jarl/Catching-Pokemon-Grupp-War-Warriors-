@@ -83,6 +83,7 @@ function gameStart() {
   let audio = document.querySelector("audio");
   audio.play();
   startTimer();
+  spawnPokemon();
   movePokemon();
   catchPokemon();
 }
