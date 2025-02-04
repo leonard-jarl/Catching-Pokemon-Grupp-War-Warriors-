@@ -94,3 +94,21 @@ function stopTimer() {
   console.log("Game timer has started.");
   console.log("Start time (ms):", gameStopTime);
 }
+
+function saveScore () {
+  let highScores = getHighScores();
+  let player = {
+    name: oGameData.trainerName,
+    time: oGameData.endTime
+  }
+
+  highScores.push(player);
+
+  highScores.sort((a, b) => a.time - b.time);
+  if(highScores.length > 10){
+    highScores = highScores.slice(0, 10);
+  }
+
+  localStorage.setItem('highscores', JSON.stringify(highScores));
+
+}
