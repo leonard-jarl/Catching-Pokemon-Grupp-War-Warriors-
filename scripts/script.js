@@ -26,12 +26,12 @@ function prepGame() {
 }
 
 function validateForm() {
-  const name = document.querySelector("#nameInput").value;
+  oGameData.trainerName = document.querySelector("#nameInput").value;
   const age = document.querySelector("#ageInput").value;
   const gender = document.querySelector("#genderInput").value;
 
   try {
-    if (name.length < 5 || name.length > 10) {
+    if (oGameData.trainerName.length < 5 || oGameData.trainerName.length > 10) {
       throw new Error("namn måste vara mellan 5 och 10 tecken långt");
     }
     if (age < 10 || age > 15) {
