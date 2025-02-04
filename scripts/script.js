@@ -92,3 +92,13 @@ function stopTimer() {
   console.log("Game timer has started.");
   console.log("Start time (ms):", gameStopTime);
 }
+
+function gameOver() {
+  stopTimer();
+  getHighscores();
+  saveHighscore();
+  let scoreboard = document.getElementById('highScore');
+  scoreboard.classList.remove('d-none');
+  let restartButton = document.getElementById('restartButton');
+  restartButton.addEventListener("click", resetGame);
+}
