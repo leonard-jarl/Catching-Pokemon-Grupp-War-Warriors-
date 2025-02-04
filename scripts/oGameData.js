@@ -40,7 +40,7 @@ const oGameData = {
   },
 
   // Metod som räknar ut och returnerar antalet millisekunder det tog att fånga alla 10 pokemons
-  nmbrOfMilliseconds: function() {
-    return this.ending - this.beginning;
-}
+  nmbrOfMilliseconds: function () {
+    return this.endTime - this.startTime;
+  },
 };

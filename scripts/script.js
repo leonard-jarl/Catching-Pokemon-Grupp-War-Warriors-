@@ -81,6 +81,7 @@ function gameStart() {
   let backgroundImage = document.querySelector("body");
   backgroundImage.style.backgroundImage = "url('/assets/arena.webp')";
   let audio = document.querySelector("audio");
+  audio.volume = 0.1;
   audio.play();
   startTimer();
   spawnPokemon();
@@ -127,7 +128,10 @@ function spawnPokemon() {
   if (!gameField) return;
 
   for (let i = 0; i < 10; i++) {
-    let pokemonId = String(Math.floor(Math.random() * 151) + 1).padStart(3, "0");
+    let pokemonId = String(Math.floor(Math.random() * 151) + 1).padStart(
+      3,
+      "0"
+    );
     let pokemonSrc = `assets/pokemons/${pokemonId}.png`;
 
     const pokemon = document.createElement("img");
@@ -145,4 +149,3 @@ function spawnPokemon() {
     setInterval(() => movePokemon(pokemon), 3000);
   }
 }
-
