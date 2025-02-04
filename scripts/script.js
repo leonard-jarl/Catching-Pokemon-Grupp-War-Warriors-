@@ -70,9 +70,9 @@ function randomPokemons() {
 }
 
 function startTimer() {
-  let gameStartTime = Date.now();
+  oGameData.startTime = Date.now();
   console.log("Game timer has started.");
-  console.log("Start time (ms):", gameStartTime);
+  console.log("Start time (ms):", oGameData.startTime);
 }
 
 function gameStart() {
@@ -89,18 +89,21 @@ function gameStart() {
 }
 
 function stopTimer() {
-  let gameStopTime = Date.now();
-  console.log("Game timer has started.");
-  console.log("Start time (ms):", gameStopTime);
+  oGameData.endTime = Date.now();
+  let totalMilliseconds = oGameData.endTime - oGameData.startTime;
+
+  console.log("Game timer has stopped.");
+  console.log("End time (ms):", oGameData.endTime);
+  console.log("Total time (ms):", totalMilliseconds);
 }
 
 function gameOver() {
   stopTimer();
   getHighscores();
   saveHighscore();
-  let scoreboard = document.getElementById('highScore');
-  scoreboard.classList.remove('d-none');
-  let restartButton = document.getElementById('restartButton');
+  let scoreboard = document.getElementById("highScore");
+  scoreboard.classList.remove("d-none");
+  let restartButton = document.getElementById("restartButton");
   restartButton.addEventListener("click", resetGame);
 }
 
