@@ -146,14 +146,8 @@ function spawnPokemon() {
       img.src = src;
       gameField.appendChild(img)
   })
-
-  positionLeft = oGameData.getLeftPosition();
-  positionTop = oGameData.getTopPosition();
-
-  pokemonRef = positionLeft, positionTop;
-
-
-    setInterval(() => movePokemon(pokemon), 3000);
+  
+    setInterval(() => movePokemon(pokemonRef), 3000);
   }
 }
 
