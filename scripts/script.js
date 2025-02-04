@@ -110,28 +110,27 @@ function spawnPokemon() {
   const gameField = document.querySelector("#gameField");
   if (!gameField) return;
 
-  for (let i = 0; i < 10; i++) {
+  const pokemonElements = [];
+
   const allPokemons = [];
-
   for (let i = 1; i < 152; i++) {
-    let pokemon = i;
-    allPokemons.push(pokemon);
+    allPokemons.push(i);
   }
 
-  for (let i = 1; i < 10 + 1; i++) {
-    let random = i;
-    random = Math.floor(Math.random() * allPokemons.length + 1);
+  for (let i = 0; i < 10; i++) {
+    let random = Math.floor(Math.random() * allPokemons.length) + 1;
     let pokemon = random.toString().padStart(3, "0");
-    oGameData.pokemonNumbers.push(`assets/pokemons/${pokemon}.png`);
+    const src = `assets/pokemons/${pokemon}.png`;
+
+    oGameData.pokemonNumbers.push(src);
+
+    const img = document.createElement('img');
+    img.src = src;
+    gameField.appendChild(img);
+
+    pokemonElements.push(img);
   }
 
-  let pokemonRef = oGameData.pokemonNumbers.forEach(src => {
-      let img = document.createElement('img');
-      img.src = src;
-      gameField.appendChild(img)
-  })
-
-    setInterval(() => movePokemon(pokemonRef), 3000);
-  }
+  setInterval(() => movePokemon(pokemonElements), 3000);
 }
 
