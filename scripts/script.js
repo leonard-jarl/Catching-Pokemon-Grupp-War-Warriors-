@@ -26,15 +26,15 @@ function prepGame() {
 }
 
 function validateForm() {
-  const name = document.querySelector("#nameInput").value;
+  oGameData.trainerName = document.querySelector("#nameInput").value;
   const age = document.querySelector("#ageInput").value;
   const gender = document.querySelector("#genderInput").value;
 
   try {
-    if (name.length >= 5 && name.length >= 10) {
+    if (oGameData.trainerName.length < 5 || oGameData.trainerName.length > 10) {
       throw new Error("namn måste vara mellan 5 och 10 tecken långt");
     }
-    if (age < 9 || age > 15) {
+    if (age < 10 || age > 15) {
       throw new Error("Ålder måste vara mellan 10 och 15 år gammal");
     }
     if (gender !== "Boy" && gender !== "Girl") {
@@ -76,15 +76,15 @@ function startTimer() {
 }
 
 function gameStart() {
-    let form = document.getElementById('gameStartSection');
-    form.classList.add('d-none');
-    let backgroundImage = document.querySelector('body');
-    backgroundImage.style.backgroundImage = "url('/assets/arena-background.png')";
-    let audio = document.querySelector('audio');
-    audio.play();
-    startTimer();
-    movePokemon();
-    catchPokemon();
+  let form = document.getElementById("gameStartSection");
+  form.classList.add("d-none");
+  let backgroundImage = document.querySelector("body");
+  backgroundImage.style.backgroundImage = "url('/assets/arena-background.png')";
+  let audio = document.querySelector("audio");
+  audio.play();
+  startTimer();
+  movePokemon();
+  catchPokemon();
 }
 
 function stopTimer() {
