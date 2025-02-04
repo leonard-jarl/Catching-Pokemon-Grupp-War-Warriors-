@@ -122,3 +122,27 @@ function resetGame() {
   form.classList.remove("d-none");
   prepGame();
 }
+function spawnPokemon() {
+  const gameField = document.getElementById("gameField");
+  if (!gameField) return;
+
+  for (let i = 0; i < 10; i++) {
+    let pokemonId = String(Math.floor(Math.random() * 151) + 1).padStart(3, "0");
+    let pokemonSrc = `assets/pokemons/${pokemonId}.png`;
+
+    const pokemon = document.createElement("img");
+    pokemon.src = pokemonSrc;
+    pokemon.classList.add("pokemon");
+
+    pokemon.style.position = "absolute";
+    pokemon.style.width = "300px";
+    pokemon.style.height = "300px";
+    pokemon.style.left = `${Math.random() * (window.innerWidth - 300)}px`;
+    pokemon.style.top = `${Math.random() * (window.innerHeight - 300)}px`;
+
+    gameField.appendChild(pokemon);
+
+    setInterval(() => movePokemon(pokemon), 3000);
+  }
+}
+
