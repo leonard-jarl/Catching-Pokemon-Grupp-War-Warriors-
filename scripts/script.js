@@ -87,6 +87,8 @@ function gameStart() {
     catchPokemon();
 }
 
+stopTimer()
+
 function stopTimer() {
   let gameStopTime = Date.now();
   console.log("Game timer has started.");
