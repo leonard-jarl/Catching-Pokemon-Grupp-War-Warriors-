@@ -94,3 +94,14 @@ function stopTimer() {
   console.log("Game timer has started.");
   console.log("Start time (ms):", gameStopTime);
 }
+function getHighScores () {
+  let highScoresData = localStorage.getItem('highscores');
+  let highScores; 
+  if (highScores == null){
+    highScores = [];
+  } else {
+    highScores = JSON.parse(highScoresData);
+  }
+
+  return highScores
+}
