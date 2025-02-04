@@ -102,3 +102,19 @@ function gameOver() {
   let restartButton = document.getElementById('restartButton');
   restartButton.addEventListener("click", resetGame);
 }
+
+function resetGame() {
+  init();
+  let audio = document.querySelector("audio");
+  if (!audio.paused) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+  let backgroundImage = document.querySelector("body");
+  backgroundImage.style.backgroundImage = "url('/assets/background2.jpg')";
+  let scoreBoard = document.getElementById("highScore");
+  scoreBoard.classList.add("d-none");
+  let form = document.getElementById("gameStartSection");
+  form.classList.remove("d-none");
+  prepGame();
+}
