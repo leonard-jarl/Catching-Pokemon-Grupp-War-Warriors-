@@ -76,19 +76,35 @@ function startTimer() {
 }
 
 function gameStart() {
-    let form = document.getElementById('gameStartSection');
-    form.classList.add('d-none');
-    let backgroundImage = document.querySelector('body');
-    backgroundImage.style.backgroundImage = "url('/assets/arena-background.png')";
-    let audio = document.querySelector('audio');
-    audio.play();
-    startTimer();
-    movePokemon();
-    catchPokemon();
+  let form = document.getElementById("gameStartSection");
+  form.classList.add("d-none");
+  let backgroundImage = document.querySelector("body");
+  backgroundImage.style.backgroundImage = "url('/assets/arena-background.png')";
+  let audio = document.querySelector("audio");
+  audio.play();
+  startTimer();
+  movePokemon();
+  catchPokemon();
 }
 
 function stopTimer() {
   let gameStopTime = Date.now();
   console.log("Game timer has started.");
   console.log("Start time (ms):", gameStopTime);
+}
+
+function resetGame() {
+  init();
+  let audio = document.querySelector("audio");
+  if (!audio.paused) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+  let backgroundImage = document.querySelector("body");
+  backgroundImage.style.backgroundImage = "url('/assets/background2.jpg')";
+  let scoreBoard = document.getElementById("highScore");
+  scoreBoard.classList.add("d-none");
+  let form = document.getElementById("gameStartSection");
+  form.classList.remove("d-none");
+  prepGame();
 }
