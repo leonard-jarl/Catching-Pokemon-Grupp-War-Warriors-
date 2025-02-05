@@ -37,7 +37,6 @@ document.querySelector("#startButton").addEventListener("click", function (e) {
   e.preventDefault();
 });
 
-
 function startTimer() {
   oGameData.startTime = Date.now();
   console.log("Game timer has started.");
@@ -105,6 +104,7 @@ function spawnPokemon() {
   const pokemonElements = [];
 
   const allPokemons = [];
+
   for (let i = 1; i < 152; i++) {
     allPokemons.push(i);
   }
@@ -116,22 +116,38 @@ function spawnPokemon() {
 
     oGameData.pokemonNumbers.push(src);
 
-    const img = document.createElement('img');
+    const img = document.createElement("img");
     img.src = src;
+    img.style.position = "absolute";
     gameField.appendChild(img);
+
+    movePokemon([img]);
 
     pokemonElements.push(img);
   }
 
   setInterval(() => movePokemon(pokemonElements), 3000);
 }
+function movePokemon(pokemonElements) {
+  pokemonElements.forEach((img) => {
+    const topPosition = oGameData.getTopPosition();
+    const leftPosition = oGameData.getLeftPosition();
+    img.style.top = topPosition + "px";
+    img.style.left = leftPosition + "px";
+  });
+}
 
+function getHighScores() {
+  let highScoresData = localStorage.getItem("highscores");
+  let highScores;
+  if (highScores == null) {
+    highScores = [];
+  } else {
+    highScores = JSON.parse(highScoresData);
+  }
 
-
-
-
-
-
+  return highScores;
+}
 
 
 function saveScore () {
@@ -149,5 +165,4 @@ function saveScore () {
   }
 
   localStorage.setItem('highscores', JSON.stringify(highScores));
-
 }
