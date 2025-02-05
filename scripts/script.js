@@ -37,7 +37,6 @@ document.querySelector("#startButton").addEventListener("click", function (e) {
   e.preventDefault();
 });
 
-
 function startTimer() {
   oGameData.startTime = Date.now();
   console.log("Game timer has started.");
@@ -57,14 +56,9 @@ function gameStart() {
   catchPokemon();
 }
 
-stopTimer()
+stopTimer();
 
 function stopTimer() {
-  let gameStopTime = Date.now();
-  console.log("Game timer has started.");
-  console.log("Start time (ms):", gameStopTime);
-}
-
   oGameData.endTime = Date.now();
   let totalMilliseconds = oGameData.endTime - oGameData.startTime;
 
@@ -117,7 +111,7 @@ function spawnPokemon() {
 
     oGameData.pokemonNumbers.push(src);
 
-    const img = document.createElement('img');
+    const img = document.createElement("img");
     img.src = src;
     img.style.position = "absolute";
     gameField.appendChild(img);
@@ -126,12 +120,11 @@ function spawnPokemon() {
 
     pokemonElements.push(img);
   }
-  
+
   setInterval(() => movePokemon(pokemonElements), 3000);
 }
 function movePokemon(pokemonElements) {
-  pokemonElements.forEach(img => {
-    
+  pokemonElements.forEach((img) => {
     const topPosition = oGameData.getTopPosition();
     const leftPosition = oGameData.getLeftPosition();
     img.style.top = topPosition + "px";
@@ -139,15 +132,14 @@ function movePokemon(pokemonElements) {
   });
 }
 
-function getHighScores () {
-  let highScoresData = localStorage.getItem('highscores');
-  let highScores; 
-  if (highScores == null){
+function getHighScores() {
+  let highScoresData = localStorage.getItem("highscores");
+  let highScores;
+  if (highScores == null) {
     highScores = [];
   } else {
     highScores = JSON.parse(highScoresData);
   }
 
-  return highScores
+  return highScores;
 }
-
