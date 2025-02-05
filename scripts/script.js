@@ -174,7 +174,7 @@ function movePokemon(pokemonElements) {
 function getHighScores() {
   let highScoresData = localStorage.getItem("highscores");
   let highScores;
-  if (highScores == null) {
+  if (highScoresData == null) {
     highScores = [];
   } else {
     highScores = JSON.parse(highScoresData);
@@ -200,17 +200,19 @@ function saveScore () {
 
   localStorage.setItem('highscores', JSON.stringify(highScores));
 
-  insertHighScore(player, highScores);
+  insertHighScore(highScores);
 }
 
-function insertHighScore (player, highScores) {
+function insertHighScore (highScores) {
   let highScoresList = document.querySelector('#highscoreList')
+
+  highScoresList.textContent = ""
   
   for (let i = 0; i < highScores.length; i++){
     let listItem = i
     listItem = document.createElement('li')
     listItem.classList.add('high-score__list-item')
-    listItem.textContent = `Player: ${player.name} Time: ${player.time}`
+    listItem.textContent = `Player: ${highScores[i].name} Time: ${highScores[i].time}`
     highScoresList.appendChild(listItem)
   }
 }
