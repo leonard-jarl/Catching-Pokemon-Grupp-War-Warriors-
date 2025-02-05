@@ -90,12 +90,9 @@ function resetGame() {
   form.classList.remove("d-none");
   let pokemonImages = document.querySelectorAll('#gameField img');
   pokemonImages.forEach(img => img.remove());
+  document.getElementById('errorMsg').textContent = '';
 
   prepGame();
-
-console.log(oGameData.pokemonNumbers); // Check if it's an array
-console.log(oGameData.pokemonNumbers.length); // Check length of the array
-
 }
 
 function spawnPokemon() {
@@ -217,11 +214,3 @@ function insertHighScore (player, highScores) {
     highScoresList.appendChild(listItem)
   }
 }
-  
-
-
-  
-
-
-
-
