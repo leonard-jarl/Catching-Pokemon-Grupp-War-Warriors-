@@ -97,30 +97,66 @@ function spawnPokemon() {
   const pokemonElements = [];
 
   const allPokemons = [];
-
   for (let i = 1; i < 152; i++) {
     allPokemons.push(i);
   }
 
   for (let i = 0; i < 10; i++) {
     let random = Math.floor(Math.random() * allPokemons.length) + 1;
-    let pokemon = random.toString().padStart(3, "0");
-    const src = `assets/pokemons/${pokemon}.png`;
+    let pokemonNumber = random.toString().padStart(3, "0");
 
-    oGameData.pokemonNumbers.push(src);
+    const pokemonObj = {
+      released: {
+        src: `assets/pokemons/${pokemonNumber}.png`,
+        active: true },
+      caught: {
+        src: 'assets/ball.webp',
+        active: false }
+    };
 
-    const img = document.createElement("img");
-    img.src = src;
-    img.style.position = "absolute";
-    gameField.appendChild(img);
+    oGameData.pokemonNumbers.push(pokemonObj);
+    console.log(pokemonObj)
 
-    movePokemon([img]);
+    const imgRef = document.createElement("img");
+    if (pokemonObj.released.active == true){
+      imgRef.src = pokemonObj.released.src
+    } else if (pokemonObj.caught.active == true){
+      imgRef.src = pokemonObj.caught.src
+    }
 
-    pokemonElements.push(img);
+    imgRef.addEventListener("mouseover", () => {
+      catchPokemon(imgRef, pokemonObj)
+    })
+
+    gameField.appendChild(imgRef);
+
+    movePokemon([imgRef]);
+
+    pokemonElements.push(imgRef);
   }
-
   setInterval(() => movePokemon(pokemonElements), 3000);
 }
+
+function catchPokemon(imgRef, pokemonObj) {
+  if (pokemonObj.released.active == true){
+    pokemonObj.caught.active = true
+    pokemonObj.released.active = false
+  } else if (pokemonObj.released.active == false){
+    pokemonObj.caught.active = false
+    pokemonObj.released.active = true
+  }
+
+  if (pokemonObj.released.active) {
+    imgRef.src = pokemonObj.released.src;
+  } else {
+    imgRef.src = pokemonObj.caught.src;
+  }
+  if (oGameData.pokemonNumbers.every(obj => obj.caught.active == true)){
+    gameField.classList.add('d-none')
+    gameOver()
+  }
+} 
+
 function movePokemon(pokemonElements) {
   pokemonElements.forEach((img) => {
     const topPosition = oGameData.getTopPosition();
