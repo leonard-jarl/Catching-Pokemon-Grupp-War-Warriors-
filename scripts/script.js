@@ -57,7 +57,14 @@ function gameStart() {
   catchPokemon();
 }
 
+stopTimer()
+
 function stopTimer() {
+  let gameStopTime = Date.now();
+  console.log("Game timer has started.");
+  console.log("Start time (ms):", gameStopTime);
+}
+
   oGameData.endTime = Date.now();
   let totalMilliseconds = oGameData.endTime - oGameData.startTime;
 
@@ -122,7 +129,6 @@ function spawnPokemon() {
   
   setInterval(() => movePokemon(pokemonElements), 3000);
 }
-
 function movePokemon(pokemonElements) {
   pokemonElements.forEach(img => {
     
@@ -132,3 +138,16 @@ function movePokemon(pokemonElements) {
     img.style.left = leftPosition + "px";
   });
 }
+
+function getHighScores () {
+  let highScoresData = localStorage.getItem('highscores');
+  let highScores; 
+  if (highScores == null){
+    highScores = [];
+  } else {
+    highScores = JSON.parse(highScoresData);
+  }
+
+  return highScores
+}
+
