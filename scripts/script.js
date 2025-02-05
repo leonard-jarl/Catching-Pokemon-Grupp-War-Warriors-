@@ -56,14 +56,7 @@ function gameStart() {
   catchPokemon();
 }
 
-stopTimer()
-
 function stopTimer() {
-  let gameStopTime = Date.now();
-  console.log("Game timer has started.");
-  console.log("Start time (ms):", gameStopTime);
-}
-
   oGameData.endTime = Date.now();
   let totalMilliseconds = oGameData.endTime - oGameData.startTime;
 
@@ -74,8 +67,8 @@ function stopTimer() {
 
 function gameOver() {
   stopTimer();
-  getHighscores();
-  saveHighscore();
+  getHighScores();
+  saveScore();
   let scoreboard = document.getElementById("highScore");
   scoreboard.classList.remove("d-none");
   let restartButton = document.getElementById("restartButton");
