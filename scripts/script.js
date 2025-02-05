@@ -58,11 +58,7 @@ function gameStart() {
 
 function stopTimer() {
   oGameData.endTime = Date.now();
-  let totalMilliseconds = oGameData.endTime - oGameData.startTime;
-
-  console.log("Game timer has stopped.");
-  console.log("End time (ms):", oGameData.endTime);
-  console.log("Total time (ms):", totalMilliseconds);
+  oGameData.endTime = oGameData.endTime - oGameData.startTime;
 }
 
 function gameOver() {
@@ -194,4 +190,26 @@ function saveScore () {
   }
 
   localStorage.setItem('highscores', JSON.stringify(highScores));
+
+  insertHighScore(player, highScores);
 }
+
+function insertHighScore (player, highScores) {
+  let highScoresList = document.querySelector('#highscoreList')
+  
+  for (let i = 0; i < highScores.length; i++){
+    let listItem = i
+    listItem = document.createElement('li')
+    listItem.classList.add('high-score__list-item')
+    listItem.textContent = `Player: ${player.name} Time: ${player.time}`
+    highScoresList.appendChild(listItem)
+  }
+}
+  
+
+
+  
+
+
+
+
