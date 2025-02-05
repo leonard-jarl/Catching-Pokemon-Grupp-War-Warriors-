@@ -90,6 +90,7 @@ function resetGame() {
   form.classList.remove("d-none");
   let pokemonImages = document.querySelectorAll('#gameField img');
   pokemonImages.forEach(img => img.remove());
+  document.getElementById('errorMsg').textContent = '';
 
   prepGame();
 
@@ -217,8 +218,6 @@ function insertHighScore (player, highScores) {
     highScoresList.appendChild(listItem)
   }
 }
-  
-
 
   
 
