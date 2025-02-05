@@ -48,6 +48,7 @@ function gameStart() {
   form.classList.add("d-none");
   let backgroundImage = document.querySelector("body");
   backgroundImage.style.backgroundImage = "url('/assets/arena.webp')";
+  gameField.classList.remove("d-none");
   let audio = document.querySelector("audio");
   audio.play();
   startTimer();
@@ -76,20 +77,31 @@ function gameOver() {
 }
 
 function resetGame() {
-  init();
+  oGameData.init();
+
   let audio = document.querySelector("audio");
   if (!audio.paused) {
     audio.pause();
     audio.currentTime = 0;
   }
+
   let backgroundImage = document.querySelector("body");
   backgroundImage.style.backgroundImage = "url('/assets/background.jpg')";
   let scoreBoard = document.getElementById("highScore");
   scoreBoard.classList.add("d-none");
   let form = document.getElementById("gameStartSection");
+  document.getElementById("StartForm").reset();
   form.classList.remove("d-none");
+  let pokemonImages = document.querySelectorAll('#gameField img');
+  pokemonImages.forEach(img => img.remove());
+
   prepGame();
+
+console.log(oGameData.pokemonNumbers); // Check if it's an array
+console.log(oGameData.pokemonNumbers.length); // Check length of the array
+
 }
+
 function spawnPokemon() {
   const gameField = document.querySelector("#gameField");
   if (!gameField) return;
