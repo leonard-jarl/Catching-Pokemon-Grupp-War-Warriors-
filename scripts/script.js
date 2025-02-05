@@ -56,8 +56,6 @@ function gameStart() {
   catchPokemon();
 }
 
-stopTimer();
-
 function stopTimer() {
   oGameData.endTime = Date.now();
   let totalMilliseconds = oGameData.endTime - oGameData.startTime;
