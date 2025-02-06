@@ -24,7 +24,7 @@
 
           <p class="game-start__error-msg" id="errorMsg"></p>
 
-          <label class="game-start__label" for="name">
+          <label class="game-start__label" for="nameInput">
             What's your name?
           </label>
           <input
@@ -33,9 +33,10 @@
             name="name"
             placeholder="Name"
             id="nameInput"
+            autocomplete="on"
           />
 
-          <label class="game-start__label" for="age"> How old are you? </label>
+          <label class="game-start__label" for="ageInput"> How old are you? </label>
           <input
             class="game-start__input"
             type="number"
@@ -44,7 +45,7 @@
             id="ageInput"
           />
 
-          <label class="game-start__label" for="gender">
+          <label class="game-start__label" for="genderInput">
             Are you a boy or a girl?
           </label>
           <select class="game-start__selector" name="gender" id="genderInput">
