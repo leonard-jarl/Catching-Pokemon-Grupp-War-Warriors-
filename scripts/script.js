@@ -1,115 +1,56 @@
-"use strict";
-
-window.addEventListener("load", () => {
-  prepGame();
-});
-
-function prepGame() {
-  let startButton = document.getElementById("startButton");
-  startButton.addEventListener("click", validateForm);
-}
-
-function validateForm() {
+window.addEventListener("load", () =>
+  document.getElementById("startButton").addEventListener("click", validateForm)
+);
+function validateForm(e) {
+  e.preventDefault();
   oGameData.trainerName = document.querySelector("#nameInput").value;
-  const age = document.querySelector("#ageInput").value;
-  const gender = document.querySelector("#genderInput").value;
-
+  oGameData.trainerAge = document.querySelector("#ageInput").value;
+  oGameData.trainerGender = document.querySelector("#genderInput").value;
   try {
-    if (oGameData.trainerName.length < 5 || oGameData.trainerName.length > 10) {
-      throw new Error("namn måste vara mellan 5 och 10 tecken långt");
-    }
-    if (age < 10 || age > 15) {
-      throw new Error("Ålder måste vara mellan 10 och 15 år gammal");
-    }
-    if (gender !== "Boy" && gender !== "Girl") {
-      throw new Error("Kön måste vara pojke eller flicka");
-    }
-
+    if (oGameData.trainerName.length < 5 || oGameData.trainerName.length > 10) throw new Error("namn måste vara mellan 5 och 10 tecken långt");
+    if (oGameData.trainerAge < 10 || oGameData.trainerAge > 15) throw new Error("Ålder måste vara mellan 10 och 15 år gammal");
+    if (oGameData.trainerGender !== "Boy" && oGameData.trainerGender !== "Girl") throw new Error("Kön måste vara pojke eller flicka");
     gameStart();
-    return true;
   } catch (error) {
     document.querySelector("#errorMsg").textContent = "Error: " + error.message;
   }
-  return false;
 }
-
-document.querySelector("#startButton").addEventListener("click", function (e) {
-  e.preventDefault();
-});
-
-function startTimer() {
-  oGameData.startTime = Date.now();
-  console.log("Game timer has started.");
-  console.log("Start time (ms):", oGameData.startTime);
-}
-
 function gameStart() {
-  let form = document.getElementById("gameStartSection");
-  form.classList.add("d-none");
-  let backgroundImage = document.querySelector("body");
-  backgroundImage.style.backgroundImage = "url('/assets/arena.webp')";
-  gameField.classList.remove("d-none");
-  let audio = document.querySelector("audio");
-  audio.play();
-  startTimer();
+  document.getElementById("gameStartSection").classList.add("d-none");
+  document.querySelector("body").style.backgroundImage = "url('/assets/arena.webp')";
+  document.getElementById('gameField').classList.remove("d-none");
+  document.querySelector("audio").play();
+  oGameData.startTime = Date.now();
   spawnPokemon();
-  movePokemon();
-  catchPokemon();
 }
-
-function stopTimer() {
-  oGameData.endTime = Date.now();
-  oGameData.endTime = oGameData.endTime - oGameData.startTime;
-}
-
 function gameOver() {
-  stopTimer();
-  getHighScores();
+  oGameData.endTime = Date.now() - oGameData.startTime;
   saveScore();
-  let scoreboard = document.getElementById("highScore");
-  scoreboard.classList.remove("d-none");
-  let restartButton = document.getElementById("restartButton");
-  restartButton.addEventListener("click", resetGame);
+  document.getElementById("highScore").classList.remove("d-none");
+  document.getElementById("restartButton").addEventListener("click", resetGame);
 }
-
 function resetGame() {
   oGameData.init();
-
   let audio = document.querySelector("audio");
-  if (!audio.paused) {
-    audio.pause();
-    audio.currentTime = 0;
-  }
-
-  let backgroundImage = document.querySelector("body");
-  backgroundImage.style.backgroundImage = "url('/assets/background.jpg')";
-  let scoreBoard = document.getElementById("highScore");
-  scoreBoard.classList.add("d-none");
-  let form = document.getElementById("gameStartSection");
+  if (!audio.paused) audio.pause(), (audio.currentTime = 0);
+  document.querySelector("body").style.backgroundImage = "url('/assets/background.jpg')";
+  document.getElementById("highScore").classList.add("d-none");
   document.getElementById("StartForm").reset();
-  form.classList.remove("d-none");
-  let pokemonImages = document.querySelectorAll('#gameField img');
-  pokemonImages.forEach(img => img.remove());
+  document.getElementById("gameStartSection").classList.remove("d-none");
+  document.querySelectorAll('#gameField img').forEach(img => img.remove());
   document.getElementById('errorMsg').textContent = '';
-
-  prepGame();
 }
-
 function spawnPokemon() {
   const gameField = document.querySelector("#gameField");
   if (!gameField) return;
-
   const pokemonElements = [];
-
   const allPokemons = [];
   for (let i = 1; i < 152; i++) {
     allPokemons.push(i);
   }
-
   for (let i = 0; i < 10; i++) {
     let random = Math.floor(Math.random() * allPokemons.length) + 1;
     let pokemonNumber = random.toString().padStart(3, "0");
-
     const pokemonObj = {
       released: {
         src: `assets/pokemons/${pokemonNumber}.png`,
@@ -118,30 +59,20 @@ function spawnPokemon() {
         src: 'assets/ball.webp',
         active: false }
     };
-
     oGameData.pokemonNumbers.push(pokemonObj);
-    console.log(pokemonObj)
-
     const imgRef = document.createElement("img");
     if (pokemonObj.released.active == true){
       imgRef.src = pokemonObj.released.src
     } else if (pokemonObj.caught.active == true){
       imgRef.src = pokemonObj.caught.src
     }
-
-    imgRef.addEventListener("mouseover", () => {
-      catchPokemon(imgRef, pokemonObj)
-    })
-
+    imgRef.addEventListener("mouseover", () => catchPokemon(imgRef, pokemonObj))
     gameField.appendChild(imgRef);
-
     movePokemon([imgRef]);
-
     pokemonElements.push(imgRef);
   }
   setInterval(() => movePokemon(pokemonElements), 3000);
 }
-
 function catchPokemon(imgRef, pokemonObj) {
   if (pokemonObj.released.active == true){
     pokemonObj.caught.active = true
@@ -150,7 +81,6 @@ function catchPokemon(imgRef, pokemonObj) {
     pokemonObj.caught.active = false
     pokemonObj.released.active = true
   }
-
   if (pokemonObj.released.active) {
     imgRef.src = pokemonObj.released.src;
   } else {
@@ -161,16 +91,12 @@ function catchPokemon(imgRef, pokemonObj) {
     gameOver()
   }
 } 
-
 function movePokemon(pokemonElements) {
   pokemonElements.forEach((img) => {
-    const topPosition = oGameData.getTopPosition();
-    const leftPosition = oGameData.getLeftPosition();
-    img.style.top = topPosition + "px";
-    img.style.left = leftPosition + "px";
+  img.style.top = oGameData.getTopPosition() + "px";
+  img.style.left = oGameData.getLeftPosition() + "px";
   });
 }
-
 function getHighScores() {
   let highScoresData = localStorage.getItem("highscores");
   let highScores;
@@ -179,35 +105,25 @@ function getHighScores() {
   } else {
     highScores = JSON.parse(highScoresData);
   }
-
   return highScores;
 }
-
-
 function saveScore () {
   let highScores = getHighScores();
   let player = {
     name: oGameData.trainerName,
     time: oGameData.endTime
   }
-
   highScores.push(player);
-
   highScores.sort((a, b) => a.time - b.time);
   if(highScores.length > 10){
     highScores = highScores.slice(0, 10);
   }
-
   localStorage.setItem('highscores', JSON.stringify(highScores));
-
   insertHighScore(highScores);
 }
-
 function insertHighScore (highScores) {
   let highScoresList = document.querySelector('#highscoreList')
-
   highScoresList.textContent = ""
-  
   for (let i = 0; i < highScores.length; i++){
     let listItem = i
     listItem = document.createElement('li')
